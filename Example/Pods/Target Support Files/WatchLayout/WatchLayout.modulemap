@@ -1,0 +1,6 @@
+framework module WatchLayout {
+  umbrella header "WatchLayout-umbrella.h"
+
+  export *
+  module * { export * }
+}
