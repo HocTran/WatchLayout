@@ -164,13 +164,11 @@ final public class WatchLayout: UICollectionViewLayout {
         let center = CGPoint(x: collectionView.bounds.midX, y: collectionView.bounds.midY)
         let result = attributes.filter { rect.intersects($0.frame) }
         result.forEach { attr in
-            if rect.contains(attr.frame) {
-                let distance = CGPoint.distance(center, attr.center)
+            let distance = CGPoint.distance(center, attr.center)
 
-                var scale = 1 - (1 - minScale) * distance / itemSize // 0.8 is scale at 1 itemsize distance
-                scale = min(max(scale, minScale), 1)
-                attr.transform = CGAffineTransform(scaleX: scale, y: scale)
-            }
+            var scale = 1 - (1 - minScale) * distance / itemSize // 0.8 is scale at 1 itemsize distance
+            scale = min(max(scale, minScale), 1)
+            attr.transform = CGAffineTransform(scaleX: scale, y: scale)
         }
         return result
     }
