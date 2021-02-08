@@ -14,6 +14,8 @@
 		151C594325D04C3B002CF5BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 151C594225D04C3B002CF5BE /* Assets.xcassets */; };
 		151C594625D04C3B002CF5BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 151C594425D04C3B002CF5BE /* LaunchScreen.storyboard */; };
 		151C595825D04CAA002CF5BE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151C595725D04CAA002CF5BE /* CollectionViewCell.swift */; };
+		15F3A3E625D0E4FE00637820 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3A3E525D0E4FE00637820 /* ImagesViewController.swift */; };
+		15F3A3EA25D0E5F100637820 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3A3E925D0E5F100637820 /* ImageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		151C594725D04C3B002CF5BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		151C595725D04CAA002CF5BE /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		15F3A3D625D0D5AB00637820 /* WatchLayout.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatchLayout.xcodeproj; path = ../WatchLayout.xcodeproj; sourceTree = "<group>"; };
+		15F3A3E525D0E4FE00637820 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
+		15F3A3E925D0E5F100637820 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +77,9 @@
 				151C593925D04C39002CF5BE /* AppDelegate.swift */,
 				151C593B25D04C39002CF5BE /* SceneDelegate.swift */,
 				151C593D25D04C39002CF5BE /* ViewController.swift */,
+				15F3A3E525D0E4FE00637820 /* ImagesViewController.swift */,
 				151C595725D04CAA002CF5BE /* CollectionViewCell.swift */,
+				15F3A3E925D0E5F100637820 /* ImageCollectionViewCell.swift */,
 				151C593F25D04C39002CF5BE /* Main.storyboard */,
 				151C594225D04C3B002CF5BE /* Assets.xcassets */,
 				151C594425D04C3B002CF5BE /* LaunchScreen.storyboard */,
@@ -178,6 +184,8 @@
 			files = (
 				151C593E25D04C39002CF5BE /* ViewController.swift in Sources */,
 				151C593A25D04C39002CF5BE /* AppDelegate.swift in Sources */,
+				15F3A3EA25D0E5F100637820 /* ImageCollectionViewCell.swift in Sources */,
+				15F3A3E625D0E4FE00637820 /* ImagesViewController.swift in Sources */,
 				151C595825D04CAA002CF5BE /* CollectionViewCell.swift in Sources */,
 				151C593C25D04C39002CF5BE /* SceneDelegate.swift in Sources */,
 			);

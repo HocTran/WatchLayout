@@ -64,6 +64,17 @@ Scroll to an item at the index path
     self.collectionView.setContentOffset(layout.centeredOffsetForItem(indexPath: IndexPath(item: 0, section: 0)), animated: true)
 ```
 
+## Screenshots
+
+Positioning | Scrolling
+:-------------:|:-------------:
+![](Screenshots/positioning.gif)  |  ![](Screenshots/scrolling.gif)
+
+
+Example 01 | Example 02
+:-------------:|:-------------:
+![](Screenshots/screenshot_01.png)  |  ![](Screenshots/screenshot_02.png)
+
 ## Example
 
 To run the example project, clone the repo, open `WatchLayout.xcworkspace`.
@@ -71,8 +82,6 @@ To run the example project, clone the repo, open `WatchLayout.xcworkspace`.
 Select scheme `WatchLayout`, **Cmd+B** to build the framwork.
 
 Select scheme `Example-iOS`, and run the example.
-
-// TBU: add screenshots
 
 ## Author
 

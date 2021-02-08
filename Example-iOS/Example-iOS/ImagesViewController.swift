@@ -25,28 +25,21 @@
 import UIKit
 import WatchLayout
 
-class ViewController: UIViewController, UICollectionViewDataSource {
+class ImagesViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet var collectionView: UICollectionView!
-    private var items = [UIColor]()
+    private var items = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let r: Range<CGFloat> = 0..<1
-        items = (0..<100).map { i -> UIColor in
-            UIColor(
-                red: CGFloat.random(in: r),
-                green: CGFloat.random(in: r),
-                blue: CGFloat.random(in: r),
-                alpha: 1)
-        }
+        items = (0...17).map { "\($0)"}
         
         let layout = WatchLayout()
-        layout.itemSize = 120
-        layout.spacing = -16
-        layout.nextItemScale = 0.6
+        layout.itemSize = 200
+        layout.spacing = -40
+        layout.nextItemScale = 0.4
         layout.minScale = 0.2
         
         collectionView.collectionViewLayout = layout
@@ -70,13 +63,9 @@ class ViewController: UIViewController, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
-        cell.backgroundColor = items[indexPath.item]
-        cell.label.text = "\(indexPath.item)"
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCollectionViewCell
+        cell.imgView.image = UIImage(named: items[indexPath.item])
         return cell
     }
 }
 
-extension ViewController {
-    
-}
