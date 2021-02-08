@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '11.0'
 
-  s.source_files = 'WatchLayout/Classes/**/*'
+  s.source_files = 'Source/*.swift'
   
   # s.resource_bundles = {
   #   'WatchLayout' => ['WatchLayout/Assets/*.png']
