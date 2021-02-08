@@ -53,6 +53,21 @@ final public class WatchLayout: UICollectionViewLayout {
         }
     }
     
+    private var _nextItemScale: CGFloat = 0.4 {
+        didSet {
+            invalidateLayout()
+        }
+    }
+    
+    public var nextItemScale: CGFloat {
+        get {
+            return _nextItemScale
+        }
+        set {
+            _nextItemScale = min(max(newValue, 0), 1)
+        }
+    }
+    
     public func centeredOffsetForItem(indexPath: IndexPath) -> CGPoint {
         guard let collectionView = self.collectionView else {
             return .zero
@@ -166,7 +181,7 @@ final public class WatchLayout: UICollectionViewLayout {
         result.forEach { attr in
             let distance = CGPoint.distance(center, attr.center)
 
-            var scale = 1 - (1 - minScale) * distance / itemSize // 0.8 is scale at 1 itemsize distance
+            var scale = 1 - (1 - nextItemScale) * distance / itemSize // 0.8 is scale at 1 itemsize distance
             scale = min(max(scale, minScale), 1)
             attr.transform = CGAffineTransform(scaleX: scale, y: scale)
         }

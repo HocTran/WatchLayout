@@ -39,12 +39,17 @@ Set the item size for collection view cell.
 layout.itemSize = 200
 ```
 
-Set the cell item spacing. Minus mean item can be overlapped.
+Set the cell item spacing. Minus means the items can be overlapped. Default value 0.
 ```swift
 layout.spacing = -40
 ```
 
-Set the minimum scaling for item depend on the distance to the center. 
+Set the scaling for item next to the item in the center. Default value 0.4
+```swift
+layout.nextItemScale = 0.2
+```
+
+Set the minimum scaling for item depending on the distance to the center.  Default value 0.2
 ```swift
 layout.minScale = 0.2
 ```

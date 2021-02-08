@@ -46,6 +46,7 @@ class ViewController: UIViewController, UICollectionViewDataSource {
         let layout = WatchLayout()
         layout.itemSize = 200
         layout.spacing = -40
+        layout.nextItemScale = 0.4
         layout.minScale = 0.2
         
         collectionView.collectionViewLayout = layout
