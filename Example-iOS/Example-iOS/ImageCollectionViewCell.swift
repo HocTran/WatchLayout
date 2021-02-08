@@ -1,6 +1,4 @@
 //
-//  Package.swift
-//
 //  Copyright (c) 2021 Hoc Tran (https://hoctran.com/)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

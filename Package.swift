@@ -22,14 +22,22 @@
 //  THE SOFTWARE.
 //
 
-
+// swift-tools-version:5.3
 import PackageDescription
 
-let package = Package(name: "WatchLayout",
-                      platforms: [.iOS(.v11)],
-                      products: [.library(name: "WatchLayout",
-                                          targets: ["WatchLayout"])],
-                      targets: [.target(name: "WatchLayout",
-                                        path: "Source")],
-                      swiftLanguageVersions: [.v5])
+let package = Package(
+    name: "WatchLayout",
+    platforms: [.iOS(.v11)],
+    products: [
+        .library(
+            name: "WatchLayout",
+            targets: ["WatchLayout"])
+    ],
+    targets: [
+        .target(
+            name: "WatchLayout",
+            path: "Source")
+    ],
+    swiftLanguageVersions: [.v5]
+)
 
