@@ -1,3 +1,4 @@
+// swift-tools-version:5.3
 //
 //  Package.swift
 //
@@ -22,7 +23,6 @@
 //  THE SOFTWARE.
 //
 
-// swift-tools-version:5.3
 import PackageDescription
 
 let package = Package(
