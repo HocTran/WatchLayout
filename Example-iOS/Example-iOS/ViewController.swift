@@ -23,7 +23,7 @@
 import UIKit
 import WatchLayout
 
-class ViewController: UIViewController, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet var collectionView: UICollectionView!
     private var items = [UIColor]()
@@ -48,6 +48,7 @@ class ViewController: UIViewController, UICollectionViewDataSource {
         layout.minScale = 0.2
         
         collectionView.collectionViewLayout = layout
+        collectionView.delegate = self
         
         DispatchQueue.main.async {
             self.collectionView.setContentOffset(layout.centeredOffsetForItem(indexPath: IndexPath(item: 0, section: 0)), animated: true)
@@ -72,6 +73,10 @@ class ViewController: UIViewController, UICollectionViewDataSource {
         cell.backgroundColor = items[indexPath.item]
         cell.label.text = "\(indexPath.item)"
         return cell
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print((collectionView.collectionViewLayout as! WatchLayout).centeredIndexPath)
     }
 }
 

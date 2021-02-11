@@ -78,6 +78,8 @@ final public class WatchLayout: UICollectionViewLayout {
         )
     }
     
+    public var centeredIndexPath: IndexPath?
+    
     private var attributes = [UICollectionViewLayoutAttributes]()
     private var layers = 1
     
@@ -104,21 +106,23 @@ final public class WatchLayout: UICollectionViewLayout {
             return
         }
         
-        if attributes.count == collectionView.numberOfItems(inSection: 0) {
-            return
-        }
-        
-        if collectionView.numberOfItems(inSection: 0) == 0 {
-            return
-        }
-        
         let N = collectionView.numberOfItems(inSection: 0)
+        
+        if attributes.count == N {
+            return
+        }
+        
+        if N == 0 {
+            return
+        }
+        
         let center = CGPoint.zero
         
         var i = 0
         var layer = 0
         
         attributes.removeAll()
+        centeredIndexPath = IndexPath(item: 0, section: 0)
         
         while i < N {
             
@@ -147,6 +151,10 @@ final public class WatchLayout: UICollectionViewLayout {
                         if i >= N {
                             break
                         }
+                    }
+                    
+                    if i >= N {
+                        break
                     }
                 }
             }
@@ -211,6 +219,7 @@ final public class WatchLayout: UICollectionViewLayout {
         }
         
         if let attr = closestAttr {
+            centeredIndexPath = attr.indexPath
             
             let expectedOffset = CGPoint(x: attr.center.x - proposedCenter.x + proposedContentOffset.x,
                                          y: attr.center.y - proposedCenter.y + proposedContentOffset.y)

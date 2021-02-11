@@ -89,4 +89,4 @@ HocTran, tranhoc78@gmail.com
 
 ## License
 
-WatchLayout is available under the MIT license. See the LICENSE file for more info.
+WatchLayout is available under the MIT license. See the [LICENSE file](LICENSE) for more info.
