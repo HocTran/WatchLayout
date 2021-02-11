@@ -64,6 +64,11 @@ Scroll to an item at the index path
     self.collectionView.setContentOffset(layout.centeredOffsetForItem(indexPath: IndexPath(item: 0, section: 0)), animated: true)
 ```
 
+Get the current centred index
+```swift
+    layout.centeredIndexPath
+```
+
 ## Screenshots
 
 Positioning | Scrolling
