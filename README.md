@@ -22,7 +22,7 @@ pod 'WatchLayout'
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/HocTran/WatchLayout.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/HocTran/WatchLayout.git", .upToNextMajor(from: "1.0.2"))
 ]
 ```
 
@@ -46,7 +46,7 @@ layout.spacing = -40
 
 Set the scaling for item next to the item in the center. Default value 0.4
 ```swift
-layout.nextItemScale = 0.2
+layout.nextItemScale = 0.4
 ```
 
 Set the minimum scaling for item depending on the distance to the center.  Default value 0.2

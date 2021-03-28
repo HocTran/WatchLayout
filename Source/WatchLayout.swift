@@ -78,7 +78,7 @@ final public class WatchLayout: UICollectionViewLayout {
         )
     }
     
-    public var centeredIndexPath: IndexPath?
+    public private(set) var centeredIndexPath: IndexPath?
     
     private var attributes = [UICollectionViewLayoutAttributes]()
     private var layers = 1
@@ -113,6 +113,8 @@ final public class WatchLayout: UICollectionViewLayout {
         }
         
         if N == 0 {
+            attributes.removeAll()
+            centeredIndexPath = nil
             return
         }
         
@@ -242,10 +244,12 @@ private struct Multagon {
     let vertexes: [CGPoint]
     
     init(_ numberOfVertex: Int, center: CGPoint, radius: CGFloat) {
+        let step = CGFloat.pi / (CGFloat(numberOfVertex) * 0.5)
         vertexes = (0..<numberOfVertex).map { i in
             CGPoint(
-                x: center.x - radius * cos(CGFloat(i) * CGFloat.pi / 3),
-                y: center.y - radius * sin(CGFloat(i) * CGFloat.pi / 3))
+                x: center.x - radius * cos(CGFloat(i) * step),
+                y: center.y - radius * sin(CGFloat(i) * step)
+            )
         }
     }
     
