@@ -24,13 +24,13 @@ import UIKit
 
 final public class WatchLayout: UICollectionViewLayout {
     
-    public var itemSize: CGFloat = 100 {
+    @objc public var itemSize: CGFloat = 100 {
         didSet {
             invalidateLayout()
         }
     }
     
-    public var spacing: CGFloat = 0 {
+    @objc public var spacing: CGFloat = 0 {
         didSet {
             invalidateLayout()
         }
@@ -42,7 +42,7 @@ final public class WatchLayout: UICollectionViewLayout {
         }
     }
     
-    public var minScale: CGFloat {
+    @objc public var minScale: CGFloat {
         get {
             return _minScale
         }
@@ -57,7 +57,7 @@ final public class WatchLayout: UICollectionViewLayout {
         }
     }
     
-    public var nextItemScale: CGFloat {
+    @objc public var nextItemScale: CGFloat {
         get {
             return _nextItemScale
         }
@@ -66,7 +66,7 @@ final public class WatchLayout: UICollectionViewLayout {
         }
     }
     
-    public func centeredOffsetForItem(indexPath: IndexPath) -> CGPoint {
+    @objc public func centeredOffsetForItem(indexPath: IndexPath) -> CGPoint {
         guard let collectionView = self.collectionView else {
             return .zero
         }
@@ -78,7 +78,7 @@ final public class WatchLayout: UICollectionViewLayout {
         )
     }
     
-    public private(set) var centeredIndexPath: IndexPath?
+    @objc public private(set) var centeredIndexPath: IndexPath?
     
     private var attributes = [UICollectionViewLayoutAttributes]()
     private var layers = 1
