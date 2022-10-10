@@ -64,7 +64,7 @@ class CollectionView: UICollectionView, UICollectionViewDataSource, UICollection
     
     init(layoutAttributes: WatchLayoutAttributes) {
         let layout = WatchLayout()
-        layout.layoutAttributes = layoutAttributes
+//        layout.layoutAttributes = layoutAttributes
         
         super.init(frame: .zero, collectionViewLayout: layout)
         

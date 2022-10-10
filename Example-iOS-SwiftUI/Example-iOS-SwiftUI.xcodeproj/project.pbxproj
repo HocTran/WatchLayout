@@ -10,8 +10,6 @@
 		156311B5261037D60033FFF8 /* Example_iOS_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156311B4261037D60033FFF8 /* Example_iOS_SwiftUIApp.swift */; };
 		156311B9261037D70033FFF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 156311B8261037D70033FFF8 /* Assets.xcassets */; };
 		156311BC261037D70033FFF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 156311BB261037D70033FFF8 /* Preview Assets.xcassets */; };
-		156311D3261038930033FFF8 /* WatchLayout_SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156311D0261038750033FFF8 /* WatchLayout_SwiftUI.framework */; };
-		156311D4261038930033FFF8 /* WatchLayout_SwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 156311D0261038750033FFF8 /* WatchLayout_SwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,28 +20,14 @@
 			remoteGlobalIDString = 156311632610331E0033FFF8;
 			remoteInfo = WatchLayout;
 		};
-		156311CF261038750033FFF8 /* PBXContainerItemProxy */ = {
+		4B02528C28F3DEBF00EC67AA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 156311C8261038740033FFF8 /* WatchLayout.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 15631199261037590033FFF8;
+			remoteGlobalIDString = 4B02527E28F3DE8700EC67AA;
 			remoteInfo = "WatchLayout-SwiftUI";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		156311D5261038930033FFF8 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				156311D4261038930033FFF8 /* WatchLayout_SwiftUI.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		156311B1261037D60033FFF8 /* Example-iOS-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,7 +43,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				156311D3261038930033FFF8 /* WatchLayout_SwiftUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				156311CE261038750033FFF8 /* WatchLayout.framework */,
-				156311D0261038750033FFF8 /* WatchLayout_SwiftUI.framework */,
+				4B02528D28F3DEBF00EC67AA /* WatchLayout_SwiftUI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,7 +112,6 @@
 				156311AD261037D60033FFF8 /* Sources */,
 				156311AE261037D60033FFF8 /* Frameworks */,
 				156311AF261037D60033FFF8 /* Resources */,
-				156311D5261038930033FFF8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,11 +168,11 @@
 			remoteRef = 156311CD261038750033FFF8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		156311D0261038750033FFF8 /* WatchLayout_SwiftUI.framework */ = {
+		4B02528D28F3DEBF00EC67AA /* WatchLayout_SwiftUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = WatchLayout_SwiftUI.framework;
-			remoteRef = 156311CF261038750033FFF8 /* PBXContainerItemProxy */;
+			remoteRef = 4B02528C28F3DEBF00EC67AA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
