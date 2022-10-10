@@ -22,7 +22,33 @@
 
 import UIKit
 
+public struct WatchLayoutAttributes {
+    public let itemSize: CGFloat
+    public let spacing: CGFloat
+    public let minScale: CGFloat
+    public let nextItemScale: CGFloat
+    
+    public init(
+        itemSize: CGFloat = 100,
+        spacing: CGFloat = 0,
+        minScale: CGFloat = 0.2,
+        nextItemScale: CGFloat = 0.4
+    ) {
+        self.itemSize = itemSize
+        self.spacing = spacing
+        self.minScale = min(max(minScale, 0), 1)
+        self.nextItemScale = min(max(nextItemScale, 0), 1)
+    }
+}
+
+
 final public class WatchLayout: UICollectionViewLayout {
+    
+    //    public var layoutAttributes = WatchLayoutAttributes() {
+    //        didSet {
+    //            invalidateLayout()
+    //        }
+    //    }
     
     @objc public var itemSize: CGFloat = 100 {
         didSet {

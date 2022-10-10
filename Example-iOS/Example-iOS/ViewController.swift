@@ -42,10 +42,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
         let layout = WatchLayout()
-        layout.itemSize = 120
-        layout.spacing = -16
-        layout.nextItemScale = 0.6
-        layout.minScale = 0.2
+        layout.layoutAttributes = WatchLayoutAttributes(
+            itemSize: 120,
+            spacing: 16,
+            minScale: 0.2,
+            nextItemScale: 0.6
+        )
         
         collectionView.collectionViewLayout = layout
         collectionView.delegate = self

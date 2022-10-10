@@ -14,8 +14,8 @@
 		151C594325D04C3B002CF5BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 151C594225D04C3B002CF5BE /* Assets.xcassets */; };
 		151C594625D04C3B002CF5BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 151C594425D04C3B002CF5BE /* LaunchScreen.storyboard */; };
 		151C595825D04CAA002CF5BE /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151C595725D04CAA002CF5BE /* CollectionViewCell.swift */; };
-		1563120A26105EED0033FFF8 /* WatchLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1563120626105ED70033FFF8 /* WatchLayout.framework */; };
-		1563120B26105EED0033FFF8 /* WatchLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1563120626105ED70033FFF8 /* WatchLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		156311772610341D0033FFF8 /* WatchLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F3A3DB25D0D5AB00637820 /* WatchLayout.framework */; };
+		156311782610341D0033FFF8 /* WatchLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 15F3A3DB25D0D5AB00637820 /* WatchLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15F3A3E625D0E4FE00637820 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3A3E525D0E4FE00637820 /* ImagesViewController.swift */; };
 		15F3A3EA25D0E5F100637820 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F3A3E925D0E5F100637820 /* ImageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -31,13 +31,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1563120C26105EED0033FFF8 /* Embed Frameworks */ = {
+		156311792610341D0033FFF8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1563120B26105EED0033FFF8 /* WatchLayout.framework in Embed Frameworks */,
+				156311782610341D0033FFF8 /* WatchLayout.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1563120A26105EED0033FFF8 /* WatchLayout.framework in Frameworks */,
+				156311772610341D0033FFF8 /* WatchLayout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,7 +77,8 @@
 				1563120126105ED70033FFF8 /* WatchLayout.xcodeproj */,
 				151C593825D04C39002CF5BE /* Example-iOS */,
 				151C593725D04C39002CF5BE /* Products */,
-				1563120926105EED0033FFF8 /* Frameworks */,
+				15F3A3D625D0D5AB00637820 /* WatchLayout.xcodeproj */,
+				156311752610341D0033FFF8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,7 +107,14 @@
 			path = "Example-iOS";
 			sourceTree = "<group>";
 		};
-		1563120226105ED70033FFF8 /* Products */ = {
+		156311752610341D0033FFF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		15F3A3D725D0D5AB00637820 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				1563120626105ED70033FFF8 /* WatchLayout.framework */,
@@ -131,7 +139,7 @@
 				151C593225D04C39002CF5BE /* Sources */,
 				151C593325D04C39002CF5BE /* Frameworks */,
 				151C593425D04C39002CF5BE /* Resources */,
-				1563120C26105EED0033FFF8 /* Embed Frameworks */,
+				156311792610341D0033FFF8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
