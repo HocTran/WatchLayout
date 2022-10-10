@@ -22,33 +22,7 @@
 
 import UIKit
 
-public struct WatchLayoutAttributes {
-    public let itemSize: CGFloat
-    public let spacing: CGFloat
-    public let minScale: CGFloat
-    public let nextItemScale: CGFloat
-    
-    public init(
-        itemSize: CGFloat = 100,
-        spacing: CGFloat = 0,
-        minScale: CGFloat = 0.2,
-        nextItemScale: CGFloat = 0.4
-    ) {
-        self.itemSize = itemSize
-        self.spacing = spacing
-        self.minScale = min(max(minScale, 0), 1)
-        self.nextItemScale = min(max(nextItemScale, 0), 1)
-    }
-}
-
-
 final public class WatchLayout: UICollectionViewLayout {
-    
-    //    public var layoutAttributes = WatchLayoutAttributes() {
-    //        didSet {
-    //            invalidateLayout()
-    //        }
-    //    }
     
     @objc public var itemSize: CGFloat = 100 {
         didSet {
@@ -297,5 +271,34 @@ private struct Multagon {
         return zip(vertexes, shifted).map { (a, b) -> CGPoint in
             CGPoint(x: a.x + (b.x - a.x) / s * i, y: a.y + (b.y - a.y) / s * i)
         }
+    }
+}
+
+// MARK: - Helper attribute struct
+public struct WatchLayoutAttributes {
+    public let itemSize: CGFloat
+    public let spacing: CGFloat
+    public let minScale: CGFloat
+    public let nextItemScale: CGFloat
+    
+    public init(
+        itemSize: CGFloat = 100,
+        spacing: CGFloat = 0,
+        minScale: CGFloat = 0.2,
+        nextItemScale: CGFloat = 0.4
+    ) {
+        self.itemSize = itemSize
+        self.spacing = spacing
+        self.minScale = min(max(minScale, 0), 1)
+        self.nextItemScale = min(max(nextItemScale, 0), 1)
+    }
+}
+
+public extension WatchLayout {
+    func setAttributes(_ layoutAttributes: WatchLayoutAttributes) {
+        self.itemSize = layoutAttributes.itemSize
+        self.spacing = layoutAttributes.spacing
+        self.minScale = layoutAttributes.minScale
+        self.nextItemScale = layoutAttributes.nextItemScale
     }
 }

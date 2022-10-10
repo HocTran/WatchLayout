@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-public struct WatchLayoutView<DataSource, Content>: UIViewRepresentable
-    where DataSource : RandomAccessCollection, Content : View, DataSource.Element : Identifiable {
+public struct WatchLayoutView<Data, Content>: UIViewRepresentable
+    where Data: RandomAccessCollection, Content: View {
     
-    @Binding var attributes: WatchLayoutAttributes
-    
-    
-    private let views: [AnyView]
-    private let collectionView: CollectionView
+    private let attributes: WatchLayoutAttributes
+    private let data: [Data.Element]
+    private let collectionView: CollectionView<Data.Element, Content>
+    private let content: (Data.Element) -> Content
     
     public func updateUIView(_ uiView: UICollectionView, context: Context) {
         uiView.collectionViewLayout.invalidateLayout()
@@ -24,15 +23,11 @@ public struct WatchLayoutView<DataSource, Content>: UIViewRepresentable
         return collectionView
     }
     
-    public init(attributes: Binding<WatchLayoutAttributes>, datasource: DataSource, content: @escaping (DataSource.Element) -> Content) {
-        self._attributes = attributes
-        
-        self.views = datasource.map { i -> AnyView in
-            AnyView(content(i))
-        }
-        
-        self.collectionView = CollectionView(layoutAttributes: attributes.wrappedValue)
-        self.collectionView.updateItems(self.views)
+    public init(attributes: WatchLayoutAttributes, data: Data, content: @escaping (Data.Element) -> Content) {
+        self.attributes = attributes
+        self.content = content
+        self.data = data.map { $0 }
+        self.collectionView = CollectionView(layoutAttributes: attributes, data: self.data, content: content)
     }
     
     public func centerToIndex(_ indexPath: IndexPath) -> Self {
@@ -46,29 +41,53 @@ public struct WatchLayoutView<DataSource, Content>: UIViewRepresentable
     }
 }
 
-class ItemCell: UICollectionViewCell {
+class ItemCell<Content: View>: UICollectionViewCell {
     
-}
-
-class CollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
+    private var hostingViewController: UIHostingController<Content>?
     
-    private var hostingUITag = 1
-    private var cellId = "cell"
-    private var items = [UIHostingController<AnyView>]()
-    func updateItems(_ items: [AnyView]) {
-        self.items = items.map {
-            UIHostingController(rootView: $0)
+    func updateContent(_ content: Content) {
+        if let hostingViewController = hostingViewController {
+            hostingViewController.view.removeFromSuperview()
+            hostingViewController.rootView = content
+        } else {
+            hostingViewController = UIHostingController(rootView: content)
         }
-        self.reloadData()
+        
+        fitting()
     }
     
-    init(layoutAttributes: WatchLayoutAttributes) {
+    private func fitting() {
+        guard let view = hostingViewController?.view else {
+            return
+        }
+        
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(view)
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: contentView.topAnchor),
+            view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ])
+    }
+}
+
+class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    private let cellId = "cell"
+    private let items: [T]
+    private let content: (T) -> Content
+
+    init(layoutAttributes: WatchLayoutAttributes, data: [T], content: @escaping (T) -> Content) {
         let layout = WatchLayout()
-//        layout.layoutAttributes = layoutAttributes
+        layout.setAttributes(layoutAttributes)
+        self.items = data
+        self.content = content
         
         super.init(frame: .zero, collectionViewLayout: layout)
         
-        self.register(ItemCell.self, forCellWithReuseIdentifier: cellId)
+        self.register(ItemCell<Content>.self, forCellWithReuseIdentifier: cellId)
         
         self.dataSource = self
     }
@@ -82,26 +101,8 @@ class CollectionView: UICollectionView, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        
-        let view = cell.contentView.viewWithTag(hostingUITag)
-        if items[indexPath.item].view !== view {
-            cell.contentView.viewWithTag(hostingUITag)?.removeFromSuperview()
-            
-            let newView = items[indexPath.item].view!
-            newView.backgroundColor = .clear
-            newView.translatesAutoresizingMaskIntoConstraints = false
-            cell.contentView.addSubview(newView)
-            NSLayoutConstraint.activate([
-                newView.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
-                newView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
-                newView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
-                newView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
-            ])
-            
-            items[indexPath.item].view.tag = hostingUITag
-        }
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ItemCell<Content>
+        cell.updateContent(content(items[indexPath.item]))
         return cell
     }
 }

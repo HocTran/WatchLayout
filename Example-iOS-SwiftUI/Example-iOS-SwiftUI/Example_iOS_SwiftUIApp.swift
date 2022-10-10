@@ -17,6 +17,7 @@ struct Example_iOS_SwiftUIApp: App {
         minScale: 0.4,
         nextItemScale: 0.6
     )
+    
     let data = (0..<100).map {
         Item(id: $0, text: "\($0)")
     }
@@ -24,13 +25,14 @@ struct Example_iOS_SwiftUIApp: App {
     public var body: some Scene {
         WindowGroup {
             
-            WatchLayoutView(attributes: $layout, datasource: data) { i in
-                Text("\(i.text)")
-                    .foregroundColor(Color(.red))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color(.white))
-                    .cornerRadius(80)
-                    .clipped()
+            WatchLayoutView(attributes: layout, data: data) { i in
+                ZStack {
+                    Text("\(i.text)")
+                        
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.gray)
+                .clipShape(Circle())
             }
             .centerToIndex(IndexPath(item: 0, section: 0))
         }

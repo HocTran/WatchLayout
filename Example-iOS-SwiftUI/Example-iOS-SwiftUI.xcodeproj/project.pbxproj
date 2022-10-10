@@ -10,6 +10,8 @@
 		156311B5261037D60033FFF8 /* Example_iOS_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156311B4261037D60033FFF8 /* Example_iOS_SwiftUIApp.swift */; };
 		156311B9261037D70033FFF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 156311B8261037D70033FFF8 /* Assets.xcassets */; };
 		156311BC261037D70033FFF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 156311BB261037D70033FFF8 /* Preview Assets.xcassets */; };
+		4B02529128F414FE00EC67AA /* WatchLayout_SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B02528D28F3DEBF00EC67AA /* WatchLayout_SwiftUI.framework */; };
+		4B02529228F414FE00EC67AA /* WatchLayout_SwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B02528D28F3DEBF00EC67AA /* WatchLayout_SwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4B02529328F414FE00EC67AA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4B02529228F414FE00EC67AA /* WatchLayout_SwiftUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		156311B1261037D60033FFF8 /* Example-iOS-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		156311B4261037D60033FFF8 /* Example_iOS_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example_iOS_SwiftUIApp.swift; sourceTree = "<group>"; };
@@ -43,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B02529128F414FE00EC67AA /* WatchLayout_SwiftUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +129,7 @@
 				156311AD261037D60033FFF8 /* Sources */,
 				156311AE261037D60033FFF8 /* Frameworks */,
 				156311AF261037D60033FFF8 /* Resources */,
+				4B02529328F414FE00EC67AA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
