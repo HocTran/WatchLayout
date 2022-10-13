@@ -10,34 +10,33 @@ import SwiftUI
 public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     where Data: RandomAccessCollection, Content: View {
     
-    private let attributes: WatchLayoutAttributes
+    @Binding var attributes: WatchLayoutAttributes
+    @Binding var centeredIndexPath: IndexPath?
+    
     private let data: [Data.Element]
-    private let collectionView: CollectionView<Data.Element, Content>
     private let content: (Data.Element) -> Content
     
     public func updateUIView(_ uiView: UICollectionView, context: Context) {
-        uiView.collectionViewLayout.invalidateLayout()
+        uiView.collectionViewLayout = WatchLayout().withAttributes(attributes)
+        context.coordinator.centerToIndexPath(centeredIndexPath)
+    }
+    
+    public func makeCoordinator() -> WatchLayoutCoordinator<Data.Element, Content> {
+        WatchLayoutCoordinator()
     }
     
     public func makeUIView(context: Context) -> UICollectionView {
+        let collectionView = CollectionView(layoutAttributes: attributes, data: data, content: content)
+        context.coordinator.setCollectionView(collectionView)
         return collectionView
     }
     
-    public init(attributes: WatchLayoutAttributes, data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
-        self.attributes = attributes
-        self.content = content
-        self.data = data.map { $0 }
-        self.collectionView = CollectionView(layoutAttributes: attributes, data: self.data, content: content)
-    }
-    
-    public func centerToIndex(_ indexPath: IndexPath) -> Self {
-        DispatchQueue.main.async {
-            if let layout = self.collectionView.collectionViewLayout as? WatchLayout {
-                self.collectionView.setContentOffset(layout.centeredOffsetForItem(indexPath: indexPath), animated: true)
-            }
-        }
+    public init(attributes: Binding<WatchLayoutAttributes>, centeredIndexPath: Binding<IndexPath?> = .constant(nil), data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
+        self._attributes = attributes
+        self._centeredIndexPath = centeredIndexPath
         
-        return self
+        self.data = data.map { $0 }
+        self.content = content
     }
 }
 
@@ -74,6 +73,27 @@ class ItemCell: UICollectionViewCell {
     }
 }
 
+public class WatchLayoutCoordinator<T, Content: View> {
+    
+    var collectionView: CollectionView<T, Content>?
+    
+    func setCollectionView(_ collectionView: CollectionView<T, Content>) {
+        self.collectionView = collectionView
+    }
+    
+    func centerToIndexPath(_ indexPath: IndexPath?) {
+        guard let indexPath = indexPath, let collectionView = self.collectionView else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            if let layout = collectionView.collectionViewLayout as? WatchLayout {
+                collectionView.setContentOffset(layout.centeredOffsetForItem(indexPath: indexPath), animated: true)
+            }
+        }
+    }
+}
+
 class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private let cellId = "cell"
@@ -81,8 +101,7 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
     private let content: (T) -> Content
 
     init(layoutAttributes: WatchLayoutAttributes, data: [T], @ViewBuilder content: @escaping (T) -> Content) {
-        let layout = WatchLayout()
-        layout.setAttributes(layoutAttributes)
+        let layout = WatchLayout().withAttributes(layoutAttributes)
         self.items = data
         self.content = content
         

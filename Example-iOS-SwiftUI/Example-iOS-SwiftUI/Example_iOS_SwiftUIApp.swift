@@ -18,26 +18,41 @@ struct Example_iOS_SwiftUIApp: App {
         nextItemScale: 0.6
     )
     
+    @State var centerIndexPath: IndexPath? = nil
+    
     let data = (0..<20).map {
         Item(id: $0, text: "\($0)")
     }
     
     public var body: some Scene {
         WindowGroup {
-            
-            WatchLayoutView(attributes: layout, data: data) { i in
-                if i.id % 2 == 0 {
-                    Text("\(i.text)")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.gray)
-                        .clipShape(Circle())
-                } else {
-                    Text("\(i.text)")
-                        .background(Color.blue)
-                        .clipShape(Circle())
+            VStack {
+                WatchLayoutView(attributes: $layout, centeredIndexPath: $centerIndexPath, data: data) { i in
+                    if i.id % 2 == 0 {
+                        Text("\(i.text)")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(Color.gray)
+                            .clipShape(Circle())
+                    } else {
+                        Text("\(i.text)")
+                            .background(Color.blue)
+                            .clipShape(Circle())
+                    }
+                }
+                
+                Button("Change configuration") {
+                    self.layout = WatchLayoutAttributes(
+                        itemSize: 400,
+                        spacing: 0,
+                        minScale: 0.4,
+                        nextItemScale: 0.6
+                    )
+                }
+                
+                Button("Change center") {
+                    self.centerIndexPath = IndexPath(item: 0, section: 0)
                 }
             }
-            .centerToIndex(IndexPath(item: 0, section: 0))
         }
     }
 }

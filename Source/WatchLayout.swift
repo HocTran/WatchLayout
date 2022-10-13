@@ -295,10 +295,12 @@ public struct WatchLayoutAttributes {
 }
 
 public extension WatchLayout {
-    func setAttributes(_ layoutAttributes: WatchLayoutAttributes) {
-        self.itemSize = layoutAttributes.itemSize
-        self.spacing = layoutAttributes.spacing
-        self.minScale = layoutAttributes.minScale
-        self.nextItemScale = layoutAttributes.nextItemScale
+    func withAttributes(_ layoutAttributes: WatchLayoutAttributes) -> WatchLayout {
+        let r = WatchLayout()
+        r.itemSize = layoutAttributes.itemSize
+        r.spacing = layoutAttributes.spacing
+        r.minScale = layoutAttributes.minScale
+        r.nextItemScale = layoutAttributes.nextItemScale
+        return r
     }
 }
