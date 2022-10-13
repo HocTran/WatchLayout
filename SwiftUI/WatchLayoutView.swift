@@ -26,7 +26,7 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     }
     
     public func makeUIView(context: Context) -> UICollectionView {
-        let collectionView = CollectionView(layoutAttributes: attributes, data: data, content: content)
+        let collectionView = WatchLayoutCollectionView(layoutAttributes: attributes, data: data, content: content)
         context.coordinator.setCollectionView(collectionView)
         return collectionView
     }
@@ -40,7 +40,7 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     }
 }
 
-class ItemCell: UICollectionViewCell {
+class WatchLayoutItemCell: UICollectionViewCell {
     
     private var hostingViewController: UIHostingController<AnyView>?
     
@@ -75,9 +75,9 @@ class ItemCell: UICollectionViewCell {
 
 public class WatchLayoutCoordinator<T, Content: View> {
     
-    var collectionView: CollectionView<T, Content>?
+    private var collectionView: WatchLayoutCollectionView<T, Content>?
     
-    func setCollectionView(_ collectionView: CollectionView<T, Content>) {
+    func setCollectionView(_ collectionView: WatchLayoutCollectionView<T, Content>) {
         self.collectionView = collectionView
     }
     
@@ -94,7 +94,7 @@ public class WatchLayoutCoordinator<T, Content: View> {
     }
 }
 
-class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
+class WatchLayoutCollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private let cellId = "cell"
     private let items: [T]
@@ -107,7 +107,7 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
         
         super.init(frame: .zero, collectionViewLayout: layout)
         
-        self.register(ItemCell.self, forCellWithReuseIdentifier: cellId)
+        self.register(WatchLayoutItemCell.self, forCellWithReuseIdentifier: cellId)
         self.dataSource = self
         
         self.backgroundColor = .lightGray
@@ -122,7 +122,7 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! WatchLayoutItemCell
 
         let ct = content(items[indexPath.item]).ignoresSafeArea() // iOS 15 sizing fix only.
         cell.updateContent(AnyView(ct))
