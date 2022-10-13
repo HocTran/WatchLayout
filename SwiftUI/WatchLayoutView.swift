@@ -23,7 +23,7 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
         return collectionView
     }
     
-    public init(attributes: WatchLayoutAttributes, data: Data, content: @escaping (Data.Element) -> Content) {
+    public init(attributes: WatchLayoutAttributes, data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
         self.attributes = attributes
         self.content = content
         self.data = data.map { $0 }
@@ -80,7 +80,7 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
     private let items: [T]
     private let content: (T) -> Content
 
-    init(layoutAttributes: WatchLayoutAttributes, data: [T], content: @escaping (T) -> Content) {
+    init(layoutAttributes: WatchLayoutAttributes, data: [T], @ViewBuilder content: @escaping (T) -> Content) {
         let layout = WatchLayout()
         layout.setAttributes(layoutAttributes)
         self.items = data
@@ -93,7 +93,7 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
         
         self.backgroundColor = .lightGray
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -105,7 +105,7 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ItemCell
 
-        let ct = content(items[indexPath.item]).ignoresSafeArea()
+        let ct = content(items[indexPath.item]).ignoresSafeArea() // iOS 15 sizing fix only.
         cell.updateContent(AnyView(ct))
         return cell
     }

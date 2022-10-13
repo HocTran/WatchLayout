@@ -18,7 +18,7 @@ struct Example_iOS_SwiftUIApp: App {
         nextItemScale: 0.6
     )
     
-    let data = (0..<100).map {
+    let data = (0..<20).map {
         Item(id: $0, text: "\($0)")
     }
     
@@ -26,10 +26,16 @@ struct Example_iOS_SwiftUIApp: App {
         WindowGroup {
             
             WatchLayoutView(attributes: layout, data: data) { i in
-                Text("\(i.text)")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.gray)
-                .clipShape(Circle())
+                if i.id % 2 == 0 {
+                    Text("\(i.text)")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.gray)
+                        .clipShape(Circle())
+                } else {
+                    Text("\(i.text)")
+                        .background(Color.blue)
+                        .clipShape(Circle())
+                }
             }
             .centerToIndex(IndexPath(item: 0, section: 0))
         }
