@@ -20,23 +20,22 @@ struct Example_iOS_SwiftUIApp: App {
     
     @State var centerIndexPath: IndexPath? = IndexPath(item: 0, section: 0)
     
-    let data = (0..<20).map {
-        Item(id: $0, text: "\($0)")
-    }
+    let data = 0..<200
     
-    public var body: some Scene {
+    var body: some Scene {
         WindowGroup {
             
             WatchLayoutView(attributes: $layout, centeredIndexPath: $centerIndexPath, data: data) { i in
-                if i.id % 2 == 0 {
-                    Text("\(i.text)")
+                if i % 2 == 0 {
+                    Text("\(i)")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.gray)
+                        .background(self.color(i))
                         .clipShape(Circle())
                 } else {
-                    Text("\(i.text)")
-                        .background(Color.blue)
-                        .clipShape(Circle())
+                    ZStack {
+                        self.color(i)
+                        Text("\(i)")
+                    }
                 }
             }
             
@@ -67,10 +66,12 @@ struct Example_iOS_SwiftUIApp: App {
             }
         }
     }
-}
-
-
-struct Item: Identifiable {
-    let id: Int
-    let text: String
+    
+    
+    func color(_ i: Int) -> Color {
+        let colors: [Color] = [
+            .red, .orange, .yellow, .green, .blue, .purple
+        ]
+        return colors[i % colors.count]
+    }
 }

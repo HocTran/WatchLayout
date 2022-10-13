@@ -60,7 +60,7 @@ class WatchLayoutItemCell: UICollectionViewCell {
             return
         }
         
-        view.backgroundColor = .red.withAlphaComponent(0.5)
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
         
@@ -109,8 +109,6 @@ class WatchLayoutCollectionView<T, Content: View>: UICollectionView, UICollectio
         
         self.register(WatchLayoutItemCell.self, forCellWithReuseIdentifier: cellId)
         self.dataSource = self
-        
-        self.backgroundColor = .lightGray
     }
 
     required init?(coder: NSCoder) {
