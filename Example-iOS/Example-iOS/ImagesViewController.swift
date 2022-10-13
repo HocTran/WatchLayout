@@ -35,12 +35,10 @@ class ImagesViewController: UIViewController, UICollectionViewDataSource {
         items = (0...17).map { "\($0)"}
         
         let layout = WatchLayout()
-        layout.layoutAttributes = WatchLayoutAttributes(
-            itemSize: 200,
-            spacing: -40,
-            minScale: 0.2,
-            nextItemScale: 0.4
-        )
+        layout.itemSize = 200
+        layout.spacing = -40
+        layout.minScale = 0.2
+        layout.nextItemScale = 0.4
         
         collectionView.collectionViewLayout = layout
         

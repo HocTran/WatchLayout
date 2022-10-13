@@ -26,10 +26,7 @@ struct Example_iOS_SwiftUIApp: App {
         WindowGroup {
             
             WatchLayoutView(attributes: layout, data: data) { i in
-                ZStack {
-                    Text("\(i.text)")
-                        
-                }
+                Text("\(i.text)")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.gray)
                 .clipShape(Circle())

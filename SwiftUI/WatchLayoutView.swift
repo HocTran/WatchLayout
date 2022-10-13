@@ -61,7 +61,7 @@ class ItemCell<Content: View>: UICollectionViewCell {
             return
         }
         
-        view.backgroundColor = .clear
+        view.backgroundColor = .red.withAlphaComponent(0.5)
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
         NSLayoutConstraint.activate([
@@ -88,8 +88,9 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
         super.init(frame: .zero, collectionViewLayout: layout)
         
         self.register(ItemCell<Content>.self, forCellWithReuseIdentifier: cellId)
-        
         self.dataSource = self
+        
+        self.backgroundColor = .lightGray
     }
     
     required init?(coder: NSCoder) {
