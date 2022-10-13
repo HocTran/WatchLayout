@@ -41,11 +41,11 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     }
 }
 
-class ItemCell<Content: View>: UICollectionViewCell {
+class ItemCell: UICollectionViewCell {
     
-    private var hostingViewController: UIHostingController<Content>?
+    private var hostingViewController: UIHostingController<AnyView>?
     
-    func updateContent(_ content: Content) {
+    func updateContent(_ content: AnyView) {
         if let hostingViewController = hostingViewController {
             hostingViewController.view.removeFromSuperview()
             hostingViewController.rootView = content
@@ -64,6 +64,7 @@ class ItemCell<Content: View>: UICollectionViewCell {
         view.backgroundColor = .red.withAlphaComponent(0.5)
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
+        
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: contentView.topAnchor),
             view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -87,7 +88,7 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
         
         super.init(frame: .zero, collectionViewLayout: layout)
         
-        self.register(ItemCell<Content>.self, forCellWithReuseIdentifier: cellId)
+        self.register(ItemCell.self, forCellWithReuseIdentifier: cellId)
         self.dataSource = self
         
         self.backgroundColor = .lightGray
@@ -102,8 +103,10 @@ class CollectionView<T, Content: View>: UICollectionView, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ItemCell<Content>
-        cell.updateContent(content(items[indexPath.item]))
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ItemCell
+
+        let ct = content(items[indexPath.item]).ignoresSafeArea()
+        cell.updateContent(AnyView(ct))
         return cell
     }
 }
