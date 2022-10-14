@@ -24,6 +24,7 @@
 		4B02527E28F3DE8700EC67AA /* WatchLayout_SwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchLayout_SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B02528628F3DE9800EC67AA /* WatchLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchLayoutView.swift; sourceTree = "<group>"; };
 		4B02528728F3DE9800EC67AA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B0BF0A228F951A9007CFB54 /* WatchLayout-SwiftUI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WatchLayout-SwiftUI.podspec"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 				156311FF26105EB10033FFF8 /* README.md */,
 				156311FD26105EB10033FFF8 /* Screenshots */,
 				156311FB26105EB10033FFF8 /* WatchLayout.podspec */,
+				4B0BF0A228F951A9007CFB54 /* WatchLayout-SwiftUI.podspec */,
 				156311F526105E9E0033FFF8 /* Source */,
 				4B02528528F3DE9800EC67AA /* SwiftUI */,
 				156311E726105E710033FFF8 /* Products */,

@@ -273,34 +273,3 @@ private struct Multagon {
         }
     }
 }
-
-// MARK: - Helper attribute struct
-public struct WatchLayoutAttributes {
-    public let itemSize: CGFloat
-    public let spacing: CGFloat
-    public let minScale: CGFloat
-    public let nextItemScale: CGFloat
-    
-    public init(
-        itemSize: CGFloat = 100,
-        spacing: CGFloat = 0,
-        minScale: CGFloat = 0.2,
-        nextItemScale: CGFloat = 0.4
-    ) {
-        self.itemSize = itemSize
-        self.spacing = spacing
-        self.minScale = min(max(minScale, 0), 1)
-        self.nextItemScale = min(max(nextItemScale, 0), 1)
-    }
-}
-
-public extension WatchLayout {
-    func withAttributes(_ layoutAttributes: WatchLayoutAttributes) -> WatchLayout {
-        let r = WatchLayout()
-        r.itemSize = layoutAttributes.itemSize
-        r.spacing = layoutAttributes.spacing
-        r.minScale = layoutAttributes.minScale
-        r.nextItemScale = layoutAttributes.nextItemScale
-        return r
-    }
-}

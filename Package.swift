@@ -27,16 +27,27 @@ import PackageDescription
 
 let package = Package(
     name: "WatchLayout",
-    platforms: [.iOS(.v11)],
+    platforms: [.iOS(.v13)],
     products: [
         .library(
             name: "WatchLayout",
-            targets: ["WatchLayout"])
+            targets: ["WatchLayout"]
+        ),
+        .library(
+            name: "WatchLayout-SwiftUI",
+            targets: ["WatchLayout-SwiftUI"]
+        )
     ],
     targets: [
         .target(
             name: "WatchLayout",
-            path: "Source")
+            path: "Source"
+        ),
+        .target(
+            name: "WatchLayout-SwiftUI",
+            dependencies: ["WatchLayout"]
+            path: "SwiftUI"
+        )
     ],
     swiftLanguageVersions: [.v5]
 )
