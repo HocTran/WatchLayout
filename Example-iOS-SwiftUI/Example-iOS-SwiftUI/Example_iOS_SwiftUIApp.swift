@@ -12,66 +12,42 @@ import WatchLayout_SwiftUI
 struct Example_iOS_SwiftUIApp: App {
     
     @State var layout = WatchLayoutAttributes(
-        itemSize: 160,
-        spacing: -16,
-        minScale: 0.4,
+        itemSize: 120,
+        spacing: 16,
+        minScale: 0.2,
         nextItemScale: 0.6
     )
     
-    @State var centerIndexPath: IndexPath? = IndexPath(item: 0, section: 0)
+    @State var centerIndexPath: IndexPath?
     
-    let data = 0..<200
+    let data = 0..<100
     
     var body: some Scene {
         WindowGroup {
-            
-            WatchLayoutView(attributes: $layout, centeredIndexPath: $centerIndexPath, data: data) { i in
-                if i % 2 == 0 {
+            NavigationView {
+                WatchLayoutView(attributes: $layout, centeredIndexPath: $centerIndexPath, data: data) { i in
                     Text("\(i)")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(self.color(i))
+                        .background(self.randomColor())
                         .clipShape(Circle())
-                } else {
-                    ZStack {
-                        self.color(i)
-                        Text("\(i)")
-                    }
                 }
-            }
-            
-            Spacer()
-            
-            VStack(spacing: 16) {
-                Button("Configuration 1") {
-                    self.layout = WatchLayoutAttributes(
-                        itemSize: 400,
-                        spacing: 0,
-                        minScale: 0.4,
-                        nextItemScale: 0.6
-                    )
-                }
-                
-                Button("Configuration 2") {
-                    self.layout = WatchLayoutAttributes(
-                        itemSize: 160,
-                        spacing: -16,
-                        minScale: 0.4,
-                        nextItemScale: 0.6
-                    )
-                }
-                
-                Button("Change center") {
+                .ignoresSafeArea()
+                .onAppear {
                     self.centerIndexPath = IndexPath(item: 0, section: 0)
+                }
+                .navigationTitle("Example 1")
+                .toolbar {
+                    NavigationLink(destination: ImagesView()) {
+                        Text("Images")
+                    }
                 }
             }
         }
     }
     
     
-    func color(_ i: Int) -> Color {
-        let colors: [Color] = [
-            .red, .orange, .yellow, .green, .blue, .purple
-        ]
-        return colors[i % colors.count]
+    func randomColor() -> Color {
+        let r: Range<Double> = 0..<1
+        return Color(.sRGB, red: Double.random(in: r), green: Double.random(in: r), blue: Double.random(in: r), opacity: 1)
     }
 }
