@@ -45,7 +45,7 @@ let package = Package(
         ),
         .target(
             name: "WatchLayout-SwiftUI",
-            dependencies: ["WatchLayout"]
+            dependencies: ["WatchLayout"],
             path: "SwiftUI"
         )
     ],
