@@ -21,7 +21,7 @@ struct ImagesView: View {
     let data = 0...17
     
     var body: some View {
-        WatchLayoutView(attributes: $layout, centeredIndexPath: $centerIndexPath, data: data) { i in
+        WatchLayoutView(layoutAttributes: layout, centeredIndexPath: $centerIndexPath, data: data) { i in
             Image("\(i)")
                 .resizable()
                 .clipShape(Circle())
