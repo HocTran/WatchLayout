@@ -17,37 +17,51 @@ struct Example_iOS_SwiftUIApp: App {
         nextItemScale: 0.6
     )
     
-    @State var selectedIn: IndexPath? = IndexPath(item: 0, section: 0)
+    @State var centeredIndex: Int? = 0
     
-    @State var data = 0..<1000
+    @State var data = 0..<10
+    
+    @State var name = "Hello"
     
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 VStack {
-                    WatchLayoutView(layoutAttributes: layout, centeredIndexPath: $centerIndexPath, data: data) { i in
+                    
+                    WatchLayoutView(layoutAttributes: layout, centeredIndex: $centeredIndex, data: data) { i in
                         Text("\(i)")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .background(self.randomColor())
                             .clipShape(Circle())
                     }
-                    .onChange(of: centerIndexPath) { newValue in
-                        print(newValue)
-                    }
                     .ignoresSafeArea()
+                    
+                    VStack {
+                        ForEach(data, id: \.self) {
+                            Text($0.description)
+                                .background(self.randomColor())
+                        }
+                    }
 
                     VStack(spacing: 16) {
                         Button("Change data") {
-                            data = (0..<100).randomElement()!..<(100..<1000).randomElement()!
+                            data = (0..<10).randomElement()!..<(10..<20).randomElement()!
                         }
 
                         Button("Change center") {
-                            centerIndexPath = IndexPath(item: (0..<data.count).randomElement()!, section: 0)
+                            centeredIndex = (0..<data.count).randomElement()!
                         }
 
                         Button("Change layout config") {
                             layout = WatchLayoutAttributes(itemSize: CGFloat((60...200).randomElement()!))
                         }
+                    }
+                    
+                    Text(name)
+                    
+                    Button("Change text") {
+//                        name = "Hello" + (0..<15).randomElement()!.description
+                        name = "Hello" + (data.count.description) + (0..<15).randomElement()!.description
                     }
                 }
                 

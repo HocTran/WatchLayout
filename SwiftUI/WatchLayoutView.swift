@@ -11,7 +11,7 @@ import WatchLayout
 public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     where Data: RandomAccessCollection, Content: View {
     
-    private var centeredIndexPath: Binding<IndexPath?>?
+    private var centeredIndex: Binding<Int?>?
     
     private let layoutAttributes: WatchLayoutAttributes
     private let data: [Data.Element]
@@ -19,7 +19,7 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     
     public func updateUIView(_ uiView: UICollectionView, context: Context) {
         context.coordinator.reloadData(data, layoutAttributes: layoutAttributes)
-        context.coordinator.centerToIndexPath(centeredIndexPath?.wrappedValue)
+        context.coordinator.centerToIndexPath(IndexPath(item: centeredIndex?.wrappedValue ?? 0, section: 0))
     }
     
     public func makeCoordinator() -> WatchLayoutCoordinator<Data.Element, Content> {
@@ -30,9 +30,9 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
         context.coordinator.collectionView
     }
     
-    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(), centeredIndexPath: Binding<IndexPath?>? = nil, data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
+    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(), centeredIndex: Binding<Int?>? = nil, data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
         self.layoutAttributes = layoutAttributes
-        self.centeredIndexPath = centeredIndexPath
+        self.centeredIndex = centeredIndex
         
         self.data = data.map { $0 }
         self.content = content
@@ -98,9 +98,7 @@ public class WatchLayoutCoordinator<T, Content: View>: NSObject, UICollectionVie
         collectionView.reloadData()
     }
     
-    func centerToIndexPath(_ indexPath: IndexPath?) {
-        
-        guard let indexPath = indexPath else { return }
+    func centerToIndexPath(_ indexPath: IndexPath) {
         
         guard (0..<items.count).contains(indexPath.item) else { return }
         
