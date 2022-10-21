@@ -17,9 +17,9 @@ struct Example_iOS_SwiftUIApp: App {
         nextItemScale: 0.6
     )
     
-    @State var centerIndexPath: IndexPath? = IndexPath(item: 0, section: 0)
+    @State var selectedIn: IndexPath? = IndexPath(item: 0, section: 0)
     
-    @State var data = 10..<20
+    @State var data = 0..<1000
     
     var body: some Scene {
         WindowGroup {
@@ -38,13 +38,13 @@ struct Example_iOS_SwiftUIApp: App {
 
                     VStack(spacing: 16) {
                         Button("Change data") {
-                            data = 20..<30
+                            data = (0..<100).randomElement()!..<(100..<1000).randomElement()!
                         }
-                        
+
                         Button("Change center") {
                             centerIndexPath = IndexPath(item: (0..<data.count).randomElement()!, section: 0)
                         }
-                        
+
                         Button("Change layout config") {
                             layout = WatchLayoutAttributes(itemSize: CGFloat((60...200).randomElement()!))
                         }
@@ -58,6 +58,7 @@ struct Example_iOS_SwiftUIApp: App {
                     }
                 }
             }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
     

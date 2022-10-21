@@ -11,7 +11,7 @@ import WatchLayout
 public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     where Data: RandomAccessCollection, Content: View {
     
-    @Binding var centeredIndexPath: IndexPath?
+    private var centeredIndexPath: Binding<IndexPath?>?
     
     private let layoutAttributes: WatchLayoutAttributes
     private let data: [Data.Element]
@@ -19,7 +19,7 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     
     public func updateUIView(_ uiView: UICollectionView, context: Context) {
         context.coordinator.reloadData(data, layoutAttributes: layoutAttributes)
-        context.coordinator.centerToIndexPath(centeredIndexPath)
+        context.coordinator.centerToIndexPath(centeredIndexPath?.wrappedValue)
     }
     
     public func makeCoordinator() -> WatchLayoutCoordinator<Data.Element, Content> {
@@ -30,9 +30,9 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
         context.coordinator.collectionView
     }
     
-    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(), centeredIndexPath: Binding<IndexPath?> = .constant(nil), data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
+    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(), centeredIndexPath: Binding<IndexPath?>? = nil, data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
         self.layoutAttributes = layoutAttributes
-        self._centeredIndexPath = centeredIndexPath
+        self.centeredIndexPath = centeredIndexPath
         
         self.data = data.map { $0 }
         self.content = content
