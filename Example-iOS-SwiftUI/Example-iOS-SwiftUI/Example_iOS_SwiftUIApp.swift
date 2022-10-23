@@ -27,18 +27,22 @@ struct Example_iOS_SwiftUIApp: App {
         WindowGroup {
             NavigationView {
                 VStack {
-                    List(data, id: \.self, selection: $centeredIndex) {
-                        Text($0.description)
-                            .background(self.randomColor())
-                    }
+//                    List(data, id: \.self, selection: $centeredIndex) {
+//                        Text($0.description)
+//                            .background(self.randomColor())
+//                    }
                     
-                    WatchLayoutView(layoutAttributes: layout, centeredIndex: $centeredIndex, data: data) { i in
+                    WatchLayoutView(layoutAttributes: layout, centeredIndex: centeredIndex, data: data) { i in
                         Text("\(i)")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .background(self.randomColor())
                             .clipShape(Circle())
                     }
                     .ignoresSafeArea()
+                    .onChange(of: centeredIndex) { newValue in
+                        print(newValue)
+                    }
+                    
                     Text("Selected \(centeredIndex ?? -1)")
                     
                     VStack {

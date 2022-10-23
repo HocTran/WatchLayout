@@ -16,18 +16,13 @@ struct ImagesView: View {
         nextItemScale: 0.4
     )
     
-    @State var centeredIndex: Int?
-    
     let data = 0...17
     
     var body: some View {
-        WatchLayoutView(layoutAttributes: layout, centeredIndex: $centeredIndex, data: data) { i in
+        WatchLayoutView(layoutAttributes: layout, data: data) { i in
             Image("\(i)")
                 .resizable()
                 .clipShape(Circle())
-        }
-        .onAppear {
-            centeredIndex = 0
         }
         .ignoresSafeArea()
     }

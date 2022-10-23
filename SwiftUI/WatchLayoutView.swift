@@ -11,15 +11,16 @@ import WatchLayout
 public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     where Data: RandomAccessCollection, Content: View {
     
-    private var centeredIndex: Binding<Int?>?
-    
     private let layoutAttributes: WatchLayoutAttributes
     private let data: [Data.Element]
     private let content: (Data.Element) -> Content
+    private let centeredIndex: Int?
     
     public func updateUIView(_ uiView: UICollectionView, context: Context) {
         context.coordinator.reloadData(data, layoutAttributes: layoutAttributes)
-        context.coordinator.centerToIndexPath(IndexPath(item: centeredIndex?.wrappedValue ?? 0, section: 0))
+        if let centeredIndex = centeredIndex {
+            context.coordinator.centerToIndexPath(IndexPath(item: centeredIndex, section: 0))
+        }
     }
     
     public func makeCoordinator() -> WatchLayoutCoordinator<Data.Element, Content> {
@@ -30,10 +31,12 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
         context.coordinator.collectionView
     }
     
-    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(), centeredIndex: Binding<Int?>? = nil, data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
+    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(),
+                centeredIndex: Int? = nil,
+                data: Data,
+                @ViewBuilder content: @escaping (Data.Element) -> Content) {
         self.layoutAttributes = layoutAttributes
         self.centeredIndex = centeredIndex
-        
         self.data = Array(data)
         self.content = content
     }
@@ -93,12 +96,20 @@ public class WatchLayoutCoordinator<T, Content: View>: NSObject, UICollectionVie
     
     
     func reloadData(_ data: [T], layoutAttributes: WatchLayoutAttributes) {
+        
+        let shouldReCenter = items.isEmpty && !data.isEmpty
+        
         items = data
+        
         if let layout = self.collectionView.collectionViewLayout as? WatchLayout,
            layout.layoutAttributes != layoutAttributes {
             collectionView.collectionViewLayout = WatchLayout().withAttributes(layoutAttributes)
         }
         collectionView.reloadData()
+        
+        if shouldReCenter {
+            centerToIndexPath(IndexPath(item: 0, section: 0))
+        }
     }
     
     func centerToIndexPath(_ idx: IndexPath) {
@@ -118,10 +129,7 @@ public class WatchLayoutCoordinator<T, Content: View>: NSObject, UICollectionVie
         
         DispatchQueue.main.async {
             if let layout = self.collectionView.collectionViewLayout as? WatchLayout {
-                
                 let desiredOffset = layout.centeredOffsetForItem(indexPath: indexPath)
-//                print(desiredOffset)
-//                print(self.collectionView.contentOffset)
                 if self.collectionView.contentOffset != desiredOffset {
                     self.collectionView.setContentOffset(desiredOffset, animated: true)
                 }
