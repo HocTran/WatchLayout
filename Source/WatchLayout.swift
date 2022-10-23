@@ -124,7 +124,7 @@ final public class WatchLayout: UICollectionViewLayout {
         var layer = 0
         
         attributes.removeAll()
-        centeredIndexPath = IndexPath(item: 0, section: 0)
+        centeredIndexPath = nil//IndexPath(item: 0, section: 0)
         
         while i < N {
             

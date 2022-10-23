@@ -34,7 +34,7 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
         self.layoutAttributes = layoutAttributes
         self.centeredIndex = centeredIndex
         
-        self.data = data.map { $0 }
+        self.data = Array(data)
         self.content = content
     }
 }
@@ -94,17 +94,37 @@ public class WatchLayoutCoordinator<T, Content: View>: NSObject, UICollectionVie
     
     func reloadData(_ data: [T], layoutAttributes: WatchLayoutAttributes) {
         items = data
-        collectionView.collectionViewLayout = WatchLayout().withAttributes(layoutAttributes)
+        if let layout = self.collectionView.collectionViewLayout as? WatchLayout,
+           layout.layoutAttributes != layoutAttributes {
+            collectionView.collectionViewLayout = WatchLayout().withAttributes(layoutAttributes)
+        }
         collectionView.reloadData()
     }
     
-    func centerToIndexPath(_ indexPath: IndexPath) {
+    func centerToIndexPath(_ idx: IndexPath) {
         
-        guard (0..<items.count).contains(indexPath.item) else { return }
+        guard !items.isEmpty else {
+            return
+        }
+        
+        let indexPath: IndexPath
+        
+        if (0..<items.count).contains(idx.item) {
+            indexPath = idx
+        } else {
+            // to get the closest possible item for an invalid indexpath
+            indexPath = IndexPath(item: items.endIndex, section: 0)
+        }
         
         DispatchQueue.main.async {
             if let layout = self.collectionView.collectionViewLayout as? WatchLayout {
-                self.collectionView.setContentOffset(layout.centeredOffsetForItem(indexPath: indexPath), animated: true)
+                
+                let desiredOffset = layout.centeredOffsetForItem(indexPath: indexPath)
+//                print(desiredOffset)
+//                print(self.collectionView.contentOffset)
+                if self.collectionView.contentOffset != desiredOffset {
+                    self.collectionView.setContentOffset(desiredOffset, animated: true)
+                }
             }
         }
     }
@@ -128,7 +148,7 @@ public class WatchLayoutCoordinator<T, Content: View>: NSObject, UICollectionVie
 }
 
 // MARK: - Helper attribute struct
-public struct WatchLayoutAttributes {
+public struct WatchLayoutAttributes: Equatable {
     public let itemSize: CGFloat
     public let spacing: CGFloat
     public let minScale: CGFloat
@@ -155,5 +175,12 @@ public extension WatchLayout {
         r.minScale = layoutAttributes.minScale
         r.nextItemScale = layoutAttributes.nextItemScale
         return r
+    }
+    
+    var layoutAttributes: WatchLayoutAttributes {
+        WatchLayoutAttributes(itemSize: itemSize,
+                              spacing: spacing,
+                              minScale: minScale,
+                              nextItemScale: nextItemScale)
     }
 }

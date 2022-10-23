@@ -27,6 +27,10 @@ struct Example_iOS_SwiftUIApp: App {
         WindowGroup {
             NavigationView {
                 VStack {
+                    List(data, id: \.self, selection: $centeredIndex) {
+                        Text($0.description)
+                            .background(self.randomColor())
+                    }
                     
                     WatchLayoutView(layoutAttributes: layout, centeredIndex: $centeredIndex, data: data) { i in
                         Text("\(i)")
@@ -35,6 +39,7 @@ struct Example_iOS_SwiftUIApp: App {
                             .clipShape(Circle())
                     }
                     .ignoresSafeArea()
+                    Text("Selected \(centeredIndex ?? -1)")
                     
                     VStack {
                         ForEach(data, id: \.self) {
