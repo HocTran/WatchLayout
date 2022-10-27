@@ -18,6 +18,7 @@ struct ImagesView: View {
     
     @State var data = 0...17
     
+    
     var body: some View {
         WatchLayoutView(layoutAttributes: layout, data: $data) { i in
             Image("\(i)")

@@ -14,14 +14,14 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     private let layoutAttributes: WatchLayoutAttributes
     
     private let data: Binding<Data>
-    private let centeredIndex: Binding<Int?>?
+    private let centeredIndex: Binding<Data.Index?>?
     
     private let content: (Data.Element) -> Content
     
     public func updateUIView(_ uiView: UICollectionView, context: Context) {
         context.coordinator.reloadData(Array(data.wrappedValue), layoutAttributes: layoutAttributes)
         if let centeredIndex = centeredIndex?.wrappedValue {
-            context.coordinator.centerToIndexPath(IndexPath(item: centeredIndex, section: 0))
+            context.coordinator.centerToIndexPath(IndexPath(item: data.wrappedValue.distance(from: data.wrappedValue.startIndex, to: centeredIndex), section: 0))
         }
     }
     
@@ -34,8 +34,19 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     }
     
     public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(),
-                centeredIndex: Binding<Int?>? = nil,
                 data: Binding<Data>,
+                @ViewBuilder content: @escaping (Data.Element) -> Content) {
+        self.layoutAttributes = layoutAttributes
+        self.centeredIndex = nil
+        self.data = data
+        self.content = content
+    }
+}
+
+extension WatchLayoutView {
+    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(),
+                data: Binding<Data>,
+                centeredIndex: Binding<Data.Index?>,
                 @ViewBuilder content: @escaping (Data.Element) -> Content) {
         self.layoutAttributes = layoutAttributes
         self.centeredIndex = centeredIndex
