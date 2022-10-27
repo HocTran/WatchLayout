@@ -71,6 +71,10 @@ final public class WatchLayout: UICollectionViewLayout {
             return .zero
         }
         
+        guard attributes.indices.contains(indexPath.item) else {
+            return .zero
+        }
+        
         let attr = attributes[indexPath.item]
         return CGPoint(
             x: attr.center.x - collectionView.bounds.width * 0.5,

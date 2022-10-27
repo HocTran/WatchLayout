@@ -12,13 +12,15 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     where Data: RandomAccessCollection, Content: View {
     
     private let layoutAttributes: WatchLayoutAttributes
-    private let data: [Data.Element]
+    
+    private let data: Binding<Data>
+    private let centeredIndex: Binding<Int?>?
+    
     private let content: (Data.Element) -> Content
-    private let centeredIndex: Int?
     
     public func updateUIView(_ uiView: UICollectionView, context: Context) {
-        context.coordinator.reloadData(data, layoutAttributes: layoutAttributes)
-        if let centeredIndex = centeredIndex {
+        context.coordinator.reloadData(Array(data.wrappedValue), layoutAttributes: layoutAttributes)
+        if let centeredIndex = centeredIndex?.wrappedValue {
             context.coordinator.centerToIndexPath(IndexPath(item: centeredIndex, section: 0))
         }
     }
@@ -32,12 +34,12 @@ public struct WatchLayoutView<Data, Content>: UIViewRepresentable
     }
     
     public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(),
-                centeredIndex: Int? = nil,
-                data: Data,
+                centeredIndex: Binding<Int?>? = nil,
+                data: Binding<Data>,
                 @ViewBuilder content: @escaping (Data.Element) -> Content) {
         self.layoutAttributes = layoutAttributes
         self.centeredIndex = centeredIndex
-        self.data = Array(data)
+        self.data = data
         self.content = content
     }
 }

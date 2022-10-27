@@ -19,23 +19,17 @@ struct Example_iOS_SwiftUIApp: App {
     
     @State var centeredIndex: Int? = 0
     
-    @State var data = 0..<10
-    
-    @State var name = "Hello"
+    @State var data = (0..<10).map { CellItem(id: $0) }
     
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 VStack {
-//                    List(data, id: \.self, selection: $centeredIndex) {
-//                        Text($0.description)
-//                            .background(self.randomColor())
-//                    }
                     
-                    WatchLayoutView(layoutAttributes: layout, centeredIndex: centeredIndex, data: data) { i in
-                        Text("\(i)")
+                    WatchLayoutView(layoutAttributes: layout, centeredIndex: $centeredIndex, data: $data) { i in
+                        Text("\(i.id)")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(self.randomColor())
+                            .background(i.color)
                             .clipShape(Circle())
                     }
                     .ignoresSafeArea()
@@ -43,18 +37,13 @@ struct Example_iOS_SwiftUIApp: App {
                         print(newValue)
                     }
                     
-                    Text("Selected \(centeredIndex ?? -1)")
                     
-                    VStack {
-                        ForEach(data, id: \.self) {
-                            Text($0.description)
-                                .background(self.randomColor())
-                        }
-                    }
-
                     VStack(spacing: 16) {
+                        
+                        Text("Selected item: \(centeredIndex ?? -1)")
+                        
                         Button("Change data") {
-                            data = (0..<10).randomElement()!..<(10..<20).randomElement()!
+                            data = (0..<(10..<40).randomElement()!).map { CellItem(id: $0) }
                         }
 
                         Button("Change center") {
@@ -64,13 +53,6 @@ struct Example_iOS_SwiftUIApp: App {
                         Button("Change layout config") {
                             layout = WatchLayoutAttributes(itemSize: CGFloat((60...200).randomElement()!))
                         }
-                    }
-                    
-                    Text(name)
-                    
-                    Button("Change text") {
-//                        name = "Hello" + (0..<15).randomElement()!.description
-                        name = "Hello" + (data.count.description) + (0..<15).randomElement()!.description
                     }
                 }
                 
@@ -84,10 +66,19 @@ struct Example_iOS_SwiftUIApp: App {
             .navigationViewStyle(StackNavigationViewStyle())
         }
     }
+}
+
+struct CellItem {
     
+    let id: Int
+    let color: Color
     
-    func randomColor() -> Color {
-        let r: Range<Double> = 0..<1
-        return Color(.sRGB, red: Double.random(in: r), green: Double.random(in: r), blue: Double.random(in: r), opacity: 1)
+    static let colors: [Color] = [
+        .red, .blue, .gray, .green, .orange, .pink, .purple, .yellow
+    ]
+    
+    init(id: Int) {
+        self.id = id
+        color = Self.colors.randomElement()!
     }
 }

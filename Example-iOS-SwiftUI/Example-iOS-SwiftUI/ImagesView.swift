@@ -16,10 +16,10 @@ struct ImagesView: View {
         nextItemScale: 0.4
     )
     
-    let data = 0...17
+    @State var data = 0...17
     
     var body: some View {
-        WatchLayoutView(layoutAttributes: layout, data: data) { i in
+        WatchLayoutView(layoutAttributes: layout, data: $data) { i in
             Image("\(i)")
                 .resizable()
                 .clipShape(Circle())
