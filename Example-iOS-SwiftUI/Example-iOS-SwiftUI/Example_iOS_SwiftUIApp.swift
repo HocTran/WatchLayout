@@ -19,7 +19,7 @@ struct Example_iOS_SwiftUIApp: App {
     
     @State var centeredIndex: Int? = 0
     
-    @State var data = (0..<10).map { CellItem(id: $0) }
+    @State var data = (0..<1000).map { CellItem(id: $0) }
     
     var body: some Scene {
         WindowGroup {
@@ -43,7 +43,7 @@ struct Example_iOS_SwiftUIApp: App {
                         Text("Selected item: \(centeredIndex ?? -1)")
                         
                         Button("Change data") {
-                            data = (0..<(10..<40).randomElement()!).map { CellItem(id: $0) }
+                            data = (0..<(1000..<1500).randomElement()!).map { CellItem(id: $0) }
                         }
 
                         Button("Change center") {

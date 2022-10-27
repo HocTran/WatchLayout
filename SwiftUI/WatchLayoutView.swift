@@ -55,6 +55,22 @@ extension WatchLayoutView {
     }
 }
 
+extension WatchLayoutView where Data.Element: Hashable {
+    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(),
+                data: Binding<Data>,
+                centeredItem: Binding<Data.Element?>,
+                @ViewBuilder content: @escaping (Data.Element) -> Content) {
+        let centeredIndex: Binding<Data.Index?>
+        if let center = centeredItem.wrappedValue, let idx = data.wrappedValue.firstIndex(of: center) {
+            centeredIndex = .constant(idx)
+        } else {
+            centeredIndex = .constant(nil)
+        }
+        
+        self = .init(layoutAttributes: layoutAttributes, data: data, centeredIndex: centeredIndex, content: content)
+    }
+}
+
 class WatchLayoutItemCell: UICollectionViewCell {
     
     private var hostingViewController: UIHostingController<AnyView>?

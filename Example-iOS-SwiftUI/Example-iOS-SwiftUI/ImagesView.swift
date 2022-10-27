@@ -16,16 +16,21 @@ struct ImagesView: View {
         nextItemScale: 0.4
     )
     
-    @State var data = 0...17
-    
+    @State var data = 0..<17
+    @State var centeredItem: Int? = 0
     
     var body: some View {
-        WatchLayoutView(layoutAttributes: layout, data: $data) { i in
+        
+        WatchLayoutView(layoutAttributes: layout, data: $data, centeredItem: $centeredItem) { i in
             Image("\(i)")
                 .resizable()
                 .clipShape(Circle())
         }
         .ignoresSafeArea()
+        
+        Button("Change center") {
+            centeredItem = data.indices.randomElement()!
+        }
     }
 }
 
