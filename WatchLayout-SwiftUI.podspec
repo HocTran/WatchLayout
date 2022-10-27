@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = 'WatchLayout'
+  s.name             = 'WatchLayout-SwiftUI'
   s.version          = '1.1.0'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.summary          = 'A bubble watch-like like out for UICollectionView'
@@ -9,8 +9,9 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '13.0'
 
-  s.source_files = 'Source/*.swift'
+  s.source_files = 'SwiftUI/*.swift'
   
   s.swift_versions = ['5']
   
+  s.dependency 'WatchLayout', '1.1.0'
 end

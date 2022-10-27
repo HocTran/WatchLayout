@@ -71,6 +71,10 @@ final public class WatchLayout: UICollectionViewLayout {
             return .zero
         }
         
+        guard attributes.indices.contains(indexPath.item) else {
+            return .zero
+        }
+        
         let attr = attributes[indexPath.item]
         return CGPoint(
             x: attr.center.x - collectionView.bounds.width * 0.5,
@@ -124,7 +128,7 @@ final public class WatchLayout: UICollectionViewLayout {
         var layer = 0
         
         attributes.removeAll()
-        centeredIndexPath = IndexPath(item: 0, section: 0)
+        centeredIndexPath = nil//IndexPath(item: 0, section: 0)
         
         while i < N {
             

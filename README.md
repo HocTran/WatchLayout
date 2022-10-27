@@ -6,7 +6,7 @@
 
 ## Requirements
 
-iOS 11+
+iOS 13+
 
 ## Installation
 
@@ -14,19 +14,22 @@ iOS 11+
 WatchLayout is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-```ruby
-pod 'WatchLayout'
-```
+UIKit | SwiftUI
+:-------------:|:-------------:
+| `pod 'WatchLayout'` | `pod 'WatchLayout-SwiftUI'` |
+
 
 ### Swift Package Manager
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/HocTran/WatchLayout.git", .upToNextMajor(from: "1.0.2"))
+    .package(url: "https://github.com/HocTran/WatchLayout.git", .upToNextMajor(from: "1.1.0"))
 ]
 ```
 
 ## Usage
+
+### UIKit
 
 ```swift
 let layout = WatchLayout()
@@ -61,32 +64,95 @@ collectionView.collectionViewLayout = layout
 
 Scroll to an item at the index path
 ```swift
-    self.collectionView.setContentOffset(layout.centeredOffsetForItem(indexPath: IndexPath(item: 0, section: 0)), animated: true)
+self.collectionView.setContentOffset(layout.centeredOffsetForItem(indexPath: IndexPath(item: 0, section: 0)), animated: true)
 ```
 
-Get the current centred index
+Get the current centered index
 ```swift
-    layout.centeredIndexPath
+layout.centeredIndexPath
+```
+
+### SwiftUI
+
+SwiftUI version is built on top of `UIViewRepresentable` of `WatchLayout`.
+
+Declare a layout attributes (See the detail of each param in the UIKit usage above).
+
+```swift
+@State var layout = WatchLayoutAttributes(
+    itemSize: 120,
+    spacing: 16,
+    minScale: 0.2,
+    nextItemScale: 0.6
+)
+```
+
+Create and assign layout attributes to the view
+
+* data: *RandomAccessCollection* (or *Binding<RandomAccessCollection>*) for computing the collection.
+
+* centeredIndex: **(Optional)** A binding to indentify the centered index of the collection.
+
+```swift
+WatchLayoutView(
+    layoutAttributes: layout,
+    data: data,
+    centeredIndex: $centeredIndex,
+    cellContent: ({ dataElement in
+        // Build up your cell content here
+        Text(dataElement.description)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(dataElement.color)
+            .clipShape(Circle())
+})
+```
+
+If **data** element is *hashable*, the centered binding can be a data element.
+
+```swift
+WatchLayoutView(
+    layoutAttributes: layout,
+    data: data,
+    centeredItem: $centeredItem,
+    cellContent: ({ dataElement in
+        // Build up your cell content here
+        Text(dataElement.description)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(dataElement.color)
+            .clipShape(Circle())
+})
 ```
 
 ## Screenshots
 
 Positioning | Scrolling
 :-------------:|:-------------:
-![](Screenshots/positioning.gif)  |  ![](Screenshots/scrolling.gif)
+![](https://raw.githubusercontent.com/HocTran/WatchLayout/SwiftUI/Screenshots/positioning.gif)  |  ![](https://raw.githubusercontent.com/HocTran/WatchLayout/SwiftUI/Screenshots/scrolling.gif)
 
 
 Example 01 | Example 02
 :-------------:|:-------------:
-![](Screenshots/screenshot_01.png)  |  ![](Screenshots/screenshot_02.png)
+![](https://raw.githubusercontent.com/HocTran/WatchLayout/SwiftUI/Screenshots/screenshot_01.png)  |  ![](https://raw.githubusercontent.com/HocTran/WatchLayout/SwiftUI/Screenshots/screenshot_02.png)
+
 
 ## Example
 
 To run the example project, clone the repo, open `WatchLayout.xcworkspace`.
 
-Select scheme `WatchLayout`, **Cmd+B** to build the framwork.
+### UIKit
 
-Select scheme `Example-iOS`, and run the example.
+* Select scheme `WatchLayout`, **Cmd+B** to build the framework.
+
+* Select scheme `Example-iOS`, and run the example.
+
+### SwiftUI
+
+* Select scheme `WatchLayout`, **Cmd+B** to build the framework.
+
+* Select scheme `WatchLayout-SwiftUI`, **Cmd+B** to build the framework.
+
+* Select scheme `Example-iOS`, and run the example.
+
 
 ## Author
 

@@ -1,6 +1,3 @@
-// swift-tools-version:5.3
-//
-//  Package.swift
 //
 //  Copyright (c) 2021 Hoc Tran (https://hoctran.com/)
 //
@@ -23,32 +20,37 @@
 //  THE SOFTWARE.
 //
 
-import PackageDescription
+import SwiftUI
+import WatchLayout_SwiftUI
 
-let package = Package(
-    name: "WatchLayout",
-    platforms: [.iOS(.v13)],
-    products: [
-        .library(
-            name: "WatchLayout",
-            targets: ["WatchLayout"]
-        ),
-        .library(
-            name: "WatchLayout-SwiftUI",
-            targets: ["WatchLayout-SwiftUI"]
-        )
-    ],
-    targets: [
-        .target(
-            name: "WatchLayout",
-            path: "Source"
-        ),
-        .target(
-            name: "WatchLayout-SwiftUI",
-            dependencies: ["WatchLayout"],
-            path: "SwiftUI"
-        )
-    ],
-    swiftLanguageVersions: [.v5]
-)
+struct ImagesView: View {
+    @State var layout = WatchLayoutAttributes(
+        itemSize: 200,
+        spacing: -40,
+        minScale: 0.2,
+        nextItemScale: 0.4
+    )
+    
+    @State var data = 0..<17
+    @State var centeredItem: Int? = 0
+    
+    var body: some View {
+        
+        WatchLayoutView(layoutAttributes: layout, data: $data, centeredItem: $centeredItem) { i in
+            Image("\(i)")
+                .resizable()
+                .clipShape(Circle())
+        }
+        .ignoresSafeArea()
+        
+        Button("Change center") {
+            centeredItem = data.indices.randomElement()!
+        }
+    }
+}
 
+struct ImagesView_Previews: PreviewProvider {
+    static var previews: some View {
+        ImagesView()
+    }
+}
