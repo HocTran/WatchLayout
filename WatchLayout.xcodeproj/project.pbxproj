@@ -10,6 +10,8 @@
 		156311F826105E9E0033FFF8 /* WatchLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156311F626105E9E0033FFF8 /* WatchLayout.swift */; };
 		4B02528828F3DE9800EC67AA /* WatchLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B02528628F3DE9800EC67AA /* WatchLayoutView.swift */; };
 		4B02528A28F3DE9D00EC67AA /* WatchLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156311F626105E9E0033FFF8 /* WatchLayout.swift */; };
+		4BD9DAB3290A5E4300023B17 /* WatchLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9DAB2290A5E4300023B17 /* WatchLayoutAttributes.swift */; };
+		4BD9DAB5290A5EA000023B17 /* WatchLayoutUIPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9DAB4290A5EA000023B17 /* WatchLayoutUIPresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		4B02528628F3DE9800EC67AA /* WatchLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchLayoutView.swift; sourceTree = "<group>"; };
 		4B02528728F3DE9800EC67AA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4B0BF0A228F951A9007CFB54 /* WatchLayout-SwiftUI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WatchLayout-SwiftUI.podspec"; sourceTree = "<group>"; };
+		4BD9DAB2290A5E4300023B17 /* WatchLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLayoutAttributes.swift; sourceTree = "<group>"; };
+		4BD9DAB4290A5EA000023B17 /* WatchLayoutUIPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLayoutUIPresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 		4B02528528F3DE9800EC67AA /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				4BD9DAB2290A5E4300023B17 /* WatchLayoutAttributes.swift */,
+				4BD9DAB4290A5EA000023B17 /* WatchLayoutUIPresentable.swift */,
 				4B02528628F3DE9800EC67AA /* WatchLayoutView.swift */,
 				4B02528728F3DE9800EC67AA /* Info.plist */,
 			);
@@ -209,6 +215,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B02528828F3DE9800EC67AA /* WatchLayoutView.swift in Sources */,
+				4BD9DAB5290A5EA000023B17 /* WatchLayoutUIPresentable.swift in Sources */,
+				4BD9DAB3290A5E4300023B17 /* WatchLayoutAttributes.swift in Sources */,
 				4B02528A28F3DE9D00EC67AA /* WatchLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
