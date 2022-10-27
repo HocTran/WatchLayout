@@ -62,12 +62,12 @@ public class WatchLayoutCoordinator<T, Content: View>: NSObject, UICollectionVie
     let collectionView: UICollectionView
     private let cellId = "cell"
     private var items: [T] = []
-    private let content: (T) -> Content
+    private let cellContent: (T) -> Content
     
-    init(layoutAtributes: WatchLayoutAttributes, @ViewBuilder content: @escaping (T) -> Content) {
+    init(layoutAtributes: WatchLayoutAttributes, @ViewBuilder cellContent: @escaping (T) -> Content) {
         
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: WatchLayout().withAttributes(layoutAtributes))
-        self.content = content
+        self.cellContent = cellContent
         
         super.init()
         
@@ -126,7 +126,7 @@ public class WatchLayoutCoordinator<T, Content: View>: NSObject, UICollectionVie
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! WatchLayoutItemCell
 
-        let ct = content(items[indexPath.item])
+        let ct = cellContent(items[indexPath.item])
         if #available(iOS 14, *) {
             cell.updateContent(AnyView(ct.ignoresSafeArea()))
         } else {
