@@ -141,15 +141,15 @@ To run the example project, clone the repo, open `WatchLayout.xcworkspace`.
 
 ### UIKit
 
-* Select scheme `WatchLayout`, **Cmd+B** to build the framwork.
+* Select scheme `WatchLayout`, **Cmd+B** to build the framework.
 
 * Select scheme `Example-iOS`, and run the example.
 
 ### SwiftUI
 
-* Select scheme `WatchLayout`, **Cmd+B** to build the framwork.
+* Select scheme `WatchLayout`, **Cmd+B** to build the framework.
 
-* Select scheme `WatchLayout-SwiftUI`, **Cmd+B** to build the framwork.
+* Select scheme `WatchLayout-SwiftUI`, **Cmd+B** to build the framework.
 
 * Select scheme `Example-iOS`, and run the example.
 
