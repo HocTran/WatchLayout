@@ -26,7 +26,7 @@ struct Example_iOS_SwiftUIApp: App {
             NavigationView {
                 VStack {
                     
-                    WatchLayoutView(layoutAttributes: layout, data: $data, centeredIndex: $centeredIndex) { i in
+                    WatchLayoutView(layoutAttributes: layout, data: data, centeredIndex: $centeredIndex) { i in
                         Text("\(i.id)")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .background(i.color)

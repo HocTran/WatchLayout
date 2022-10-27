@@ -55,6 +55,18 @@ extension WatchLayoutView {
     }
 }
 
+extension WatchLayoutView {
+    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(),
+                data: Data,
+                centeredIndex: Binding<Data.Index?>,
+                @ViewBuilder content: @escaping (Data.Element) -> Content) {
+        self.layoutAttributes = layoutAttributes
+        self.centeredIndex = centeredIndex
+        self.data = .constant(data)
+        self.content = content
+    }
+}
+
 extension WatchLayoutView where Data.Element: Hashable {
     public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(),
                 data: Binding<Data>,
@@ -68,6 +80,15 @@ extension WatchLayoutView where Data.Element: Hashable {
         }
         
         self = .init(layoutAttributes: layoutAttributes, data: data, centeredIndex: centeredIndex, content: content)
+    }
+}
+
+extension WatchLayoutView where Data.Element: Hashable {
+    public init(layoutAttributes: WatchLayoutAttributes = WatchLayoutAttributes(),
+                data: Data,
+                centeredItem: Binding<Data.Element?>,
+                @ViewBuilder content: @escaping (Data.Element) -> Content) {
+        self = .init(layoutAttributes: layoutAttributes, data: .constant(data), centeredItem: centeredItem, content: content)
     }
 }
 
