@@ -6,7 +6,7 @@
 
 ## Requirements
 
-iOS 11+
+iOS 13+
 
 ## Installation
 
