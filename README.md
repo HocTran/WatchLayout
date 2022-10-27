@@ -127,12 +127,12 @@ WatchLayoutView(
 
 Positioning | Scrolling
 :-------------:|:-------------:
-![](Screenshots/positioning.gif)  |  ![](Screenshots/scrolling.gif)
+![](https://raw.githubusercontent.com/HocTran/WatchLayout/SwiftUI/Screenshots/positioning.gif)  |  ![](https://raw.githubusercontent.com/HocTran/WatchLayout/SwiftUI/Screenshots/scrolling.gif)
 
 
 Example 01 | Example 02
 :-------------:|:-------------:
-![](Screenshots/screenshot_01.png)  |  ![](Screenshots/screenshot_02.png)
+![](https://raw.githubusercontent.com/HocTran/WatchLayout/SwiftUI/Screenshots/screenshot_01.png)  |  ![](https://raw.githubusercontent.com/HocTran/WatchLayout/SwiftUI/Screenshots/screenshot_02.png)
 
 
 ## Example
