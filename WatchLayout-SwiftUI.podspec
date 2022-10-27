@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'WatchLayout-SwiftUI'
-  s.version          = '1.0.2'
+  s.version          = '1.1.0'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.summary          = 'A bubble watch-like like out for UICollectionView'
   s.homepage         = 'https://github.com/HocTran/WatchLayout'
@@ -13,5 +13,5 @@ Pod::Spec.new do |s|
   
   s.swift_versions = ['5']
   
-  s.dependency 'WatchLayout'
+  s.dependency 'WatchLayout', '1.1.0'
 end
